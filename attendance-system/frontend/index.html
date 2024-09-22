@@ -38,21 +38,19 @@
             <span class="close" ng-click="closeModal()">&times;</span>
             <div class="login-wrap">
                 <div class="login-html">
+                    <!-- Tab for switching between login and signup -->
                     <input id="tab-1" type="radio" name="tab" class="sign-in" checked><label for="tab-1" class="tab">Sign In</label>
                     <input id="tab-2" type="radio" name="tab" class="sign-up"><label for="tab-2" class="tab">Sign Up</label>
                     <div class="login-form">
+                        <!-- Sign-In Form -->
                         <div class="sign-in-htm">
                             <div class="group">
-                                <label for="user" class="label">Username</label>
-                                <input id="user" type="text" class="input" ng-model="loginData.username">
+                                <label for="user" class="label">Email</label>
+                                <input id="user" type="email" class="input" ng-model="loginData.email">
                             </div>
                             <div class="group">
                                 <label for="pass" class="label">Password</label>
                                 <input id="pass" type="password" class="input" data-type="password" ng-model="loginData.password">
-                            </div>
-                            <div class="group">
-                                <input id="check" type="checkbox" class="check" checked>
-                                <label for="check"><span class="icon"></span> Keep me Signed in</label>
                             </div>
                             <div class="group">
                                 <input type="submit" class="button" value="Sign In" ng-click="submitLogin()">
@@ -62,28 +60,30 @@
                                 <a href="#forgot">Forgot Password?</a>
                             </div>
                         </div>
+
+                        <!-- Sign-Up Form -->
                         <div class="sign-up-htm">
                             <div class="group">
-                                <label for="signup-user" class="label">Username</label>
-                                <input id="signup-user" type="text" class="input" ng-model="signupData.username">
+                                <label for="signup-user" class="label">Name</label>
+                                <input id="signup-user" type="text" class="input" ng-model="signupData.name">
+                            </div>
+                            <div class="group">
+                                <label for="signup-email" class="label">Email Address</label>
+                                <input id="signup-email" type="email" class="input" ng-model="signupData.email">
                             </div>
                             <div class="group">
                                 <label for="signup-pass" class="label">Password</label>
                                 <input id="signup-pass" type="password" class="input" data-type="password" ng-model="signupData.password">
                             </div>
                             <div class="group">
-                                <label for="repeat-pass" class="label">Repeat Password</label>
-                                <input id="repeat-pass" type="password" class="input" data-type="password" ng-model="signupData.repeatPassword">
-                            </div>
-                            <div class="group">
-                                <label for="email" class="label">Email Address</label>
-                                <input id="email" type="email" class="input" ng-model="signupData.email">
+                                <label for="phone_number" class="label">Phone Number</label>
+                                <input id="phone_number" type="text" class="input" ng-model="signupData.phone_number">
                             </div>
                             <div class="group">
                                 <label for="role" class="label">Select Role</label>
                                 <select id="role" class="input" ng-model="signupData.role">
-                                    <option value="student" class="useropt">Student</option>
-                                    <option value="teacher" class="useropt">Teacher</option>
+                                    <option value="student">Student</option>
+                                    <option value="teacher">Teacher</option>
                                 </select>
                             </div>
                             <div class="group">
@@ -91,7 +91,7 @@
                             </div>
                             <div class="hr"></div>
                             <div class="foot-lnk">
-                                <label for="tab-1">Already Member?</label>
+                                <label for="tab-1">Already a Member?</label>
                             </div>
                         </div>
                     </div>

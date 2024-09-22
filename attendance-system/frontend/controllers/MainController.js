@@ -1,30 +1,68 @@
-angular.module('attendanceApp')
-    .controller('MainController', ['$scope', function($scope) {
+angular.module('attendanceApp', [])
+    .controller('MainController', function ($scope, $http) {
         $scope.isModalOpen = false;
-        $scope.isLogin = true; // Default to login view
-        $scope.loginData = {};
-        $scope.signupData = {};
+        $scope.userRole = null;  // Track user role (student/teacher)
 
-        $scope.openModal = function() {
+        // Open modal
+        $scope.openModal = function () {
             $scope.isModalOpen = true;
         };
 
-        $scope.closeModal = function() {
+        // Close modal
+        $scope.closeModal = function () {
             $scope.isModalOpen = false;
-            $scope.isLogin = true; // Reset to login view on close
         };
 
-        $scope.toggleLogin = function() {
-            $scope.isLogin = !$scope.isLogin; // Toggle between login and signup
+        // Handle Login Submission
+        $scope.submitLogin = function () {
+            $http.post('/login', $scope.loginData).then(function (response) {
+                alert("Login successful!");
+                $scope.userRole = response.data.role;
+                $scope.closeModal();
+            }).catch(function (error) {
+                if (error.status === 401) {
+                    alert("Invalid login credentials!");
+                } else if (error.status === 404) {
+                    alert("User not found! Please sign up.");
+                } else {
+                    alert("An error occurred during login.");
+                }
+            });
         };
 
-        $scope.submitLogin = function() {
-            // Logic for logging in
-            console.log('Logging in:', $scope.loginData);
+        // Handle Sign-up Submission
+        $scope.submitSignup = function () {
+            $http.post('/signup', $scope.signupData).then(function (response) {
+                alert("Signup successful!");
+                $scope.userRole = $scope.signupData.role;  // Set role after signup
+                $scope.closeModal();
+            }).catch(function (error) {
+                if (error.status === 400) {
+                    alert("User already exists!");
+                } else {
+                    alert("Signup failed! Please try again.");
+                }
+            });
         };
 
-        $scope.submitSignup = function() {
-            // Logic for signing up
-            console.log('Signing up:', $scope.signupData);
+        // Handle Logout
+        $scope.logout = function () {
+            $scope.userRole = null;
+            alert("You have logged out.");
         };
-    }]);
+
+        // Initialize empty data objects
+        $scope.loginData = {
+            email: '',
+            password: ''
+        };
+
+        $scope.signupData = {
+            name: '',
+            email: '',
+            phone_number: '',
+            password: '',
+            repeatPassword: '',
+            role: 'student'
+        };
+    });
